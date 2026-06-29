@@ -1,0 +1,102 @@
+{% extends 'empleados/base.html' %}
+
+{% block title %}Inicio — Gestión de Empleados{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold"><i class="bi bi-people-fill text-primary me-2"></i>Gestión de Empleados</h1>
+            <p class="lead text-muted">CRUD implementado con Vistas Basadas en Funciones (VBF) y Vistas Basadas en Clases (VBC)</p>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="row g-4 mb-5">
+            <div class="col-md-6">
+                <div class="card text-center border-primary shadow-sm">
+                    <div class="card-body py-4">
+                        <i class="bi bi-briefcase-fill text-primary" style="font-size: 2.5rem;"></i>
+                        <h2 class="mt-2 fw-bold text-primary">{{ total_cargos }}</h2>
+                        <p class="text-muted mb-0">Cargos registrados</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-center border-success shadow-sm">
+                    <div class="card-body py-4">
+                        <i class="bi bi-person-badge-fill text-success" style="font-size: 2.5rem;"></i>
+                        <h2 class="mt-2 fw-bold text-success">{{ total_empleados }}</h2>
+                        <p class="text-muted mb-0">Empleados registrados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VBF -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header card-header-vbf">
+                <h5 class="mb-0"><span class="badge bg-light text-primary me-2">VBF</span>Vistas Basadas en Funciones</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Implementación usando funciones de Python con decoradores y lógica de control manual (if/else para GET/POST).</p>
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbf:cargo_lista' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-briefcase me-1"></i> Cargos
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbf:cargo_crear' %}" class="btn btn-primary w-100">
+                            <i class="bi bi-plus-circle me-1"></i> Nuevo Cargo
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbf:empleado_lista' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-people me-1"></i> Empleados
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbf:empleado_crear' %}" class="btn btn-primary w-100">
+                            <i class="bi bi-person-plus me-1"></i> Nuevo Empleado
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VBC -->
+        <div class="card shadow-sm">
+            <div class="card-header card-header-vbc">
+                <h5 class="mb-0"><span class="badge bg-light text-success me-2">VBC</span>Vistas Basadas en Clases</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Implementación usando clases genéricas de Django (ListView, CreateView, UpdateView, DeleteView).</p>
+                <div class="row g-2">
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbc:cargo_lista' %}" class="btn btn-outline-success w-100">
+                            <i class="bi bi-briefcase me-1"></i> Cargos
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbc:cargo_crear' %}" class="btn btn-success w-100">
+                            <i class="bi bi-plus-circle me-1"></i> Nuevo Cargo
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbc:empleado_lista' %}" class="btn btn-outline-success w-100">
+                            <i class="bi bi-people me-1"></i> Empleados
+                        </a>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <a href="{% url 'vbc:empleado_crear' %}" class="btn btn-success w-100">
+                            <i class="bi bi-person-plus me-1"></i> Nuevo Empleado
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'empleados/base.html' %}
+
+{% block title %}{{ titulo }} (VBF){% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header card-header-vbf">
+                <h5 class="mb-0">
+                    <span class="badge bg-light text-primary me-2">VBF</span>{{ titulo }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold">
+                            {{ field.label }}
+                            {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                        </label>
+                        {{ field }}
+                        {% if field.errors %}
+                        <div class="text-danger small mt-1">{{ field.errors.as_text }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>{{ accion }}
+                        </button>
+                        <a href="{% url 'vbf:cargo_lista' %}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

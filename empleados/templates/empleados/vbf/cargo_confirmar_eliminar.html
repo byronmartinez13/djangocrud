@@ -1,0 +1,39 @@
+{% extends 'empleados/base.html' %}
+
+{% block title %}Eliminar Cargo (VBF){% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="bi bi-exclamation-triangle me-2"></i>Confirmar Eliminación</h5>
+            </div>
+            <div class="card-body">
+                <p class="fs-5">¿Estás seguro de que deseas eliminar el cargo <strong>"{{ cargo.nombre }}"</strong>?</p>
+                {% if cargo.descripcion %}
+                <p class="text-muted">Descripción: {{ cargo.descripcion }}</p>
+                {% endif %}
+                {% with total=cargo.empleados.count %}
+                {% if total > 0 %}
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    Este cargo tiene <strong>{{ total }} empleado{{ total|pluralize }}</strong> asociado{{ total|pluralize }}.
+                    Al eliminarlo también se eliminarán esos empleados.
+                </div>
+                {% endif %}
+                {% endwith %}
+                <form method="post" class="d-flex gap-2 mt-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i>Sí, eliminar
+                    </button>
+                    <a href="{% url 'vbf:cargo_lista' %}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>Cancelar
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

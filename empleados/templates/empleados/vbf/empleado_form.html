@@ -1,0 +1,86 @@
+{% extends 'empleados/base.html' %}
+
+{% block title %}{{ titulo }} (VBF){% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header card-header-vbf">
+                <h5 class="mb-0">
+                    <span class="badge bg-light text-primary me-2">VBF</span>{{ titulo }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="{{ form.nombres.id_for_label }}" class="form-label fw-semibold">
+                                {{ form.nombres.label }} <span class="text-danger">*</span>
+                            </label>
+                            {{ form.nombres }}
+                            {% if form.nombres.errors %}
+                            <div class="text-danger small mt-1">{{ form.nombres.errors.as_text }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="{{ form.apellidos.id_for_label }}" class="form-label fw-semibold">
+                                {{ form.apellidos.label }} <span class="text-danger">*</span>
+                            </label>
+                            {{ form.apellidos }}
+                            {% if form.apellidos.errors %}
+                            <div class="text-danger small mt-1">{{ form.apellidos.errors.as_text }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="{{ form.correo.id_for_label }}" class="form-label fw-semibold">
+                                {{ form.correo.label }} <span class="text-danger">*</span>
+                            </label>
+                            {{ form.correo }}
+                            {% if form.correo.errors %}
+                            <div class="text-danger small mt-1">{{ form.correo.errors.as_text }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-3">
+                            <label for="{{ form.sueldo.id_for_label }}" class="form-label fw-semibold">
+                                {{ form.sueldo.label }} <span class="text-danger">*</span>
+                            </label>
+                            {{ form.sueldo }}
+                            {% if form.sueldo.errors %}
+                            <div class="text-danger small mt-1">{{ form.sueldo.errors.as_text }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-3">
+                            <label for="{{ form.fecha_ingreso.id_for_label }}" class="form-label fw-semibold">
+                                {{ form.fecha_ingreso.label }} <span class="text-danger">*</span>
+                            </label>
+                            {{ form.fecha_ingreso }}
+                            {% if form.fecha_ingreso.errors %}
+                            <div class="text-danger small mt-1">{{ form.fecha_ingreso.errors.as_text }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="{{ form.cargo.id_for_label }}" class="form-label fw-semibold">
+                                {{ form.cargo.label }} <span class="text-danger">*</span>
+                            </label>
+                            {{ form.cargo }}
+                            {% if form.cargo.errors %}
+                            <div class="text-danger small mt-1">{{ form.cargo.errors.as_text }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-1"></i>{{ accion }}
+                        </button>
+                        <a href="{% url 'vbf:empleado_lista' %}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle me-1"></i>Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

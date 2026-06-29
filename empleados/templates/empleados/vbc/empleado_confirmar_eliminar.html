@@ -1,0 +1,32 @@
+{% extends 'empleados/base.html' %}
+
+{% block title %}Eliminar Empleado (VBC){% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="bi bi-exclamation-triangle me-2"></i>Confirmar Eliminación</h5>
+            </div>
+            <div class="card-body">
+                <p class="fs-5">¿Estás seguro de que deseas eliminar al empleado <strong>"{{ empleado }}"</strong>?</p>
+                <ul class="list-unstyled text-muted">
+                    <li><i class="bi bi-envelope me-2"></i>{{ empleado.correo }}</li>
+                    <li><i class="bi bi-briefcase me-2"></i>{{ empleado.cargo }}</li>
+                    <li><i class="bi bi-cash me-2"></i>${{ empleado.sueldo }}</li>
+                </ul>
+                <form method="post" class="d-flex gap-2 mt-3">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-1"></i>Sí, eliminar
+                    </button>
+                    <a href="{% url 'vbc:empleado_lista' %}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>Cancelar
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
