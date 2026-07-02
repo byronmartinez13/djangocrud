@@ -1,102 +1,175 @@
 {% extends 'empleados/base.html' %}
 
-{% block title %}Inicio — Gestión de Empleados{% endblock %}
+{% block title %}Vantex Solutions — Talento que impulsa negocios{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-lg-10">
 
-        <div class="text-center mb-5">
-            <h1 class="display-5 fw-bold"><i class="bi bi-people-fill text-primary me-2"></i>Gestión de Empleados</h1>
-            <p class="lead text-muted">CRUD implementado con Vistas Basadas en Funciones (VBF) y Vistas Basadas en Clases (VBC)</p>
-        </div>
+<!-- Hero -->
+<div class="hero-vantex rounded-4 p-5 mb-5 text-center shadow">
+    <i class="bi bi-diagram-3-fill" style="font-size: 3rem;"></i>
+    <h1 class="display-5 fw-bold mt-3">Vantex Solutions S.A.</h1>
+    <p class="lead">Impulsamos el talento que impulsa tu negocio</p>
+    <p class="mb-4">Tecnología, consultoría y desarrollo de software desde 2011 &mdash; Guayaquil, Ecuador</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'gestion_empleados' %}" class="btn btn-light btn-lg fw-semibold">
+        <i class="bi bi-grid me-1"></i> Ir al sistema de gestión
+    </a>
+    {% else %}
+    <a href="{% url 'signin' %}" class="btn btn-light btn-lg fw-semibold">
+        <i class="bi bi-box-arrow-in-right me-1"></i> Acceder al sistema
+    </a>
+    {% endif %}
+</div>
 
-        <!-- Estadísticas -->
-        <div class="row g-4 mb-5">
-            <div class="col-md-6">
-                <div class="card text-center border-primary shadow-sm">
-                    <div class="card-body py-4">
-                        <i class="bi bi-briefcase-fill text-primary" style="font-size: 2.5rem;"></i>
-                        <h2 class="mt-2 fw-bold text-primary">{{ total_cargos }}</h2>
-                        <p class="text-muted mb-0">Cargos registrados</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card text-center border-success shadow-sm">
-                    <div class="card-body py-4">
-                        <i class="bi bi-person-badge-fill text-success" style="font-size: 2.5rem;"></i>
-                        <h2 class="mt-2 fw-bold text-success">{{ total_empleados }}</h2>
-                        <p class="text-muted mb-0">Empleados registrados</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- VBF -->
-        <div class="card shadow-sm mb-4">
-            <div class="card-header card-header-vbf">
-                <h5 class="mb-0"><span class="badge bg-light text-primary me-2">VBF</span>Vistas Basadas en Funciones</h5>
-            </div>
+<!-- Sobre nosotros -->
+<div class="row g-4 mb-5 align-items-stretch">
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-primary">
             <div class="card-body">
-                <p class="text-muted">Implementación usando funciones de Python con decoradores y lógica de control manual (if/else para GET/POST).</p>
-                <div class="row g-2">
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbf:cargo_lista' %}" class="btn btn-outline-primary w-100">
-                            <i class="bi bi-briefcase me-1"></i> Cargos
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbf:cargo_crear' %}" class="btn btn-primary w-100">
-                            <i class="bi bi-plus-circle me-1"></i> Nuevo Cargo
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbf:empleado_lista' %}" class="btn btn-outline-primary w-100">
-                            <i class="bi bi-people me-1"></i> Empleados
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbf:empleado_crear' %}" class="btn btn-primary w-100">
-                            <i class="bi bi-person-plus me-1"></i> Nuevo Empleado
-                        </a>
-                    </div>
-                </div>
+                <h4 class="text-primary"><i class="bi bi-bullseye me-2"></i>Misión</h4>
+                <p class="text-muted mb-0">
+                    Impulsar la transformación digital de nuestros clientes mediante soluciones tecnológicas
+                    innovadoras, respaldadas por un equipo humano altamente capacitado y comprometido con la
+                    excelencia.
+                </p>
             </div>
         </div>
-
-        <!-- VBC -->
-        <div class="card shadow-sm">
-            <div class="card-header card-header-vbc">
-                <h5 class="mb-0"><span class="badge bg-light text-success me-2">VBC</span>Vistas Basadas en Clases</h5>
-            </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-success">
             <div class="card-body">
-                <p class="text-muted">Implementación usando clases genéricas de Django (ListView, CreateView, UpdateView, DeleteView).</p>
-                <div class="row g-2">
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbc:cargo_lista' %}" class="btn btn-outline-success w-100">
-                            <i class="bi bi-briefcase me-1"></i> Cargos
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbc:cargo_crear' %}" class="btn btn-success w-100">
-                            <i class="bi bi-plus-circle me-1"></i> Nuevo Cargo
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbc:empleado_lista' %}" class="btn btn-outline-success w-100">
-                            <i class="bi bi-people me-1"></i> Empleados
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-3">
-                        <a href="{% url 'vbc:empleado_crear' %}" class="btn btn-success w-100">
-                            <i class="bi bi-person-plus me-1"></i> Nuevo Empleado
-                        </a>
-                    </div>
-                </div>
+                <h4 class="text-success"><i class="bi bi-eye-fill me-2"></i>Visión</h4>
+                <p class="text-muted mb-0">
+                    Ser la empresa líder en soluciones de software y consultoría TI de la región, reconocida
+                    por la calidad de sus proyectos y por el desarrollo integral de su talento humano.
+                </p>
             </div>
         </div>
-
     </div>
 </div>
+
+<!-- Estadísticas -->
+<div class="row g-4 mb-5 text-center">
+    <div class="col-6 col-md-3">
+        <div class="card shadow-sm border-0 bg-primary text-white h-100">
+            <div class="card-body py-4">
+                <i class="bi bi-calendar-check" style="font-size: 2rem;"></i>
+                <h3 class="mt-2 fw-bold mb-0">+14</h3>
+                <small>Años de trayectoria</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card shadow-sm border-0 bg-success text-white h-100">
+            <div class="card-body py-4">
+                <i class="bi bi-briefcase-fill" style="font-size: 2rem;"></i>
+                <h3 class="mt-2 fw-bold mb-0">{{ total_cargos }}</h3>
+                <small>Departamentos y cargos</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card shadow-sm border-0 bg-info text-white h-100">
+            <div class="card-body py-4">
+                <i class="bi bi-person-badge-fill" style="font-size: 2rem;"></i>
+                <h3 class="mt-2 fw-bold mb-0">{{ total_empleados }}</h3>
+                <small>Colaboradores activos</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card shadow-sm border-0 bg-dark text-white h-100">
+            <div class="card-body py-4">
+                <i class="bi bi-award-fill" style="font-size: 2rem;"></i>
+                <h3 class="mt-2 fw-bold mb-0">120+</h3>
+                <small>Clientes atendidos</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Servicios -->
+<h3 class="text-center mb-4"><i class="bi bi-gear-fill me-2"></i>Nuestros Servicios</h3>
+<div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm text-center">
+            <div class="card-body">
+                <i class="bi bi-code-slash text-primary" style="font-size: 2.2rem;"></i>
+                <h6 class="mt-3 fw-bold">Desarrollo de Software</h6>
+                <p class="text-muted small mb-0">Soluciones a medida para procesos empresariales.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm text-center">
+            <div class="card-body">
+                <i class="bi bi-graph-up-arrow text-success" style="font-size: 2.2rem;"></i>
+                <h6 class="mt-3 fw-bold">Consultoría Digital</h6>
+                <p class="text-muted small mb-0">Acompañamiento en procesos de transformación digital.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm text-center">
+            <div class="card-body">
+                <i class="bi bi-headset text-info" style="font-size: 2.2rem;"></i>
+                <h6 class="mt-3 fw-bold">Soporte y Mantenimiento TI</h6>
+                <p class="text-muted small mb-0">Infraestructura y sistemas siempre disponibles.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm text-center">
+            <div class="card-body">
+                <i class="bi bi-mortarboard-fill text-warning" style="font-size: 2.2rem;"></i>
+                <h6 class="mt-3 fw-bold">Capacitación Empresarial</h6>
+                <p class="text-muted small mb-0">Programas de formación en tecnología para equipos.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Valores -->
+<div class="card shadow-sm mb-5">
+    <div class="card-body">
+        <h4 class="mb-3"><i class="bi bi-heart-fill text-danger me-2"></i>Nuestros Valores</h4>
+        <div class="row g-3 text-center">
+            <div class="col-6 col-md-2"><span class="badge bg-primary w-100 py-2">Innovación</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-success w-100 py-2">Integridad</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-info w-100 py-2">Trabajo en equipo</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-warning text-dark w-100 py-2">Excelencia</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-dark w-100 py-2">Compromiso</span></div>
+            <div class="col-6 col-md-2"><span class="badge bg-secondary w-100 py-2">Orientación al cliente</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- Únete / Contacto -->
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100 border-0 bg-light">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-people-fill text-primary" style="font-size: 2.5rem;"></i>
+                <h5 class="mt-3 fw-bold">Únete a nuestro equipo</h5>
+                <p class="text-muted">Crea tu cuenta y forma parte del sistema de talento humano de Vantex.</p>
+                <a href="{% url 'signup' %}" class="btn btn-primary">
+                    <i class="bi bi-person-plus me-1"></i> Registrarme
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100 border-0 bg-light">
+            <div class="card-body py-5">
+                <h5 class="fw-bold"><i class="bi bi-geo-alt-fill text-danger me-2"></i>Contáctanos</h5>
+                <p class="text-muted mb-1">Av. Francisco de Orellana y Miguel H. Alcívar</p>
+                <p class="text-muted mb-1">Edificio World Trade Center, Torre B, Piso 8</p>
+                <p class="text-muted mb-1">Guayaquil, Ecuador</p>
+                <p class="text-muted mb-1"><i class="bi bi-telephone me-2"></i>+593 4 268-1234</p>
+                <p class="text-muted mb-0"><i class="bi bi-envelope me-2"></i>contacto@vantexsolutions.com.ec</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

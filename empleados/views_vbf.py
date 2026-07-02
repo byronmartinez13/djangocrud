@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Cargo, Empleado
 from .forms import CargoForm, EmpleadoForm
@@ -12,15 +13,43 @@ def home(request):
     })
 
 
+@login_required
+def gestion_empleados(request):
+    total_cargos = Cargo.objects.count()
+    total_empleados = Empleado.objects.count()
+    return render(request, 'empleados/gestion.html', {
+        'total_cargos': total_cargos,
+        'total_empleados': total_empleados,
+    })
+
+
+@login_required
+def modulo_empleados(request):
+    total_empleados = Empleado.objects.count()
+    return render(request, 'empleados/modulo_empleados.html', {
+        'total_empleados': total_empleados,
+    })
+
+
+@login_required
+def modulo_cargos(request):
+    total_cargos = Cargo.objects.count()
+    return render(request, 'empleados/modulo_cargos.html', {
+        'total_cargos': total_cargos,
+    })
+
+
 # ─────────────────────────────────────────────
 #  CRUD Cargos — Vistas Basadas en Funciones
 # ─────────────────────────────────────────────
 
+@login_required
 def cargo_lista_vbf(request):
     cargos = Cargo.objects.all()
     return render(request, 'empleados/vbf/cargo_lista.html', {'cargos': cargos})
 
 
+@login_required
 def cargo_crear_vbf(request):
     if request.method == 'POST':
         form = CargoForm(request.POST)
@@ -36,6 +65,7 @@ def cargo_crear_vbf(request):
     })
 
 
+@login_required
 def cargo_editar_vbf(request, pk):
     cargo = get_object_or_404(Cargo, pk=pk)
     if request.method == 'POST':
@@ -52,6 +82,7 @@ def cargo_editar_vbf(request, pk):
     })
 
 
+@login_required
 def cargo_eliminar_vbf(request, pk):
     cargo = get_object_or_404(Cargo, pk=pk)
     if request.method == 'POST':
@@ -64,11 +95,13 @@ def cargo_eliminar_vbf(request, pk):
 #  CRUD Empleados — Vistas Basadas en Funciones
 # ─────────────────────────────────────────────
 
+@login_required
 def empleado_lista_vbf(request):
     empleados = Empleado.objects.select_related('cargo').all()
     return render(request, 'empleados/vbf/empleado_lista.html', {'empleados': empleados})
 
 
+@login_required
 def empleado_crear_vbf(request):
     if request.method == 'POST':
         form = EmpleadoForm(request.POST)
@@ -84,6 +117,7 @@ def empleado_crear_vbf(request):
     })
 
 
+@login_required
 def empleado_editar_vbf(request, pk):
     empleado = get_object_or_404(Empleado, pk=pk)
     if request.method == 'POST':
@@ -100,6 +134,7 @@ def empleado_editar_vbf(request, pk):
     })
 
 
+@login_required
 def empleado_eliminar_vbf(request, pk):
     empleado = get_object_or_404(Empleado, pk=pk)
     if request.method == 'POST':

@@ -1,0 +1,45 @@
+{% extends 'empleados/base.html' %}
+
+{% block title %}Gestión de Empleados — Vantex Solutions{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+
+        <div class="text-center mb-5">
+            <h1 class="display-6 fw-bold"><i class="bi bi-people-fill text-primary me-2"></i>Gestión de Empleados</h1>
+            <p class="lead text-muted">Panel de Talento Humano de Vantex Solutions</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <a href="{% url 'modulo_empleados' %}" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm border-primary card-header-vbf-hover">
+                        <div class="card-body text-center py-5">
+                            <i class="bi bi-person-badge-fill text-primary" style="font-size: 3rem;"></i>
+                            <h3 class="mt-3 fw-bold text-dark">Módulo Empleados</h3>
+                            <p class="text-muted">Administra el registro de colaboradores de la empresa.</p>
+                            <h2 class="fw-bold text-primary">{{ total_empleados }}</h2>
+                            <small class="text-muted">empleados registrados</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="{% url 'modulo_cargos' %}" class="text-decoration-none">
+                    <div class="card h-100 shadow-sm border-success">
+                        <div class="card-body text-center py-5">
+                            <i class="bi bi-briefcase-fill text-success" style="font-size: 3rem;"></i>
+                            <h3 class="mt-3 fw-bold text-dark">Módulo Cargos</h3>
+                            <p class="text-muted">Administra los cargos y departamentos de la empresa.</p>
+                            <h2 class="fw-bold text-success">{{ total_cargos }}</h2>
+                            <small class="text-muted">cargos registrados</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
